@@ -1,6 +1,4 @@
 MultilingualDemo::Application.routes.draw do
-  resources :recipes
-
   mount Tolk::Engine => '/tolk', :as => 'tolk'
 
   # The priority is based upon order of creation:
@@ -28,6 +26,12 @@ MultilingualDemo::Application.routes.draw do
   #       get 'sold'
   #     end
   #   end
+  resources :recipes do
+    member do
+      get 'add_german'
+      put 'update_german'
+    end
+  end
 
   # Sample resource route with sub-resources:
   #   resources :products do

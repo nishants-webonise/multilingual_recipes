@@ -1,0 +1,19 @@
+---
+de:
+  hello: Hallo Welt
+  recipes: Rezepte
+  recipe: Rezept
+  back: zurück
+  cancel: stornieren
+  confirm: Sind Sie sicher?
+  destroy: löschen
+  new: neu
+  edit: Bearbeiten
+  add_german: Deutsch hinzufügen
+  convert_german: Konvertieren in Deutsch
+  title: Titel
+  description: Beschreibung
+  ingredients: Zutaten
+  preparation_method: Herstellungsverfahren
+  new_recipe: neues Rezept
+  edit_recipe: Rezept bearbeiten

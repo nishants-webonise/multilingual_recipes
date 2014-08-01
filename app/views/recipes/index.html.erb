@@ -1,42 +1,47 @@
 <%- model_class = Recipe -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-</div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:title) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:ingredients) %></th>
-      <th><%= model_class.human_attribute_name(:preparation_method) %></th>
-      <!-- <th><%#= model_class.human_attribute_name(:created_at) %></th> -->
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @recipes.each do |recipe| %>
-      <tr>
-        <td><%= link_to recipe.id, recipe_path(recipe) %></td>
-        <td><%= recipe.title %></td>
-        <td><%= recipe.description %></td>
-        <td><%= recipe.ingredients %></td>
-        <td><%= recipe.preparation_method %></td>
-        <!-- <td><%=l recipe.created_at %></td> -->
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_recipe_path(recipe), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+
+<div class="container">
+  <div class="page-header">
+    <p>
+    <%= link_to_unless I18n.locale == :en, "English", locale: :en %>
+    |
+    <%= link_to_unless I18n.locale == :de, "German", locale: :de %>
+    </p>
+    <h1><%= t 'recipes' %></h1>
+  </div>
+
+  <div class="row">
+    <div class="span12">
+      <%= link_to t('new', :default => t("new")),
+        new_recipe_path,
+        :class => 'btn btn-success' %>
+        <hr>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span12">
+      <% @recipes.each do |recipe| %>
+      <div class="well">
+        <h4><%= link_to recipe.title, recipe_path(recipe) %></h4>
+        <p><%= recipe.description %></p>
+        <h6><%= t 'ingredients' %></h6>
+        <p><%= recipe.ingredients %></p>
+        <h6><%= t 'preparation_method' %></h6>
+        <p><%= recipe.preparation_method %></p>
+        <div class="form-actions">
+          <%= link_to t('edit', :default => t("edit")),
+                      edit_recipe_path(recipe), :class => 'btn btn-primary' %>
+          <%# unless  Recipe::Translation.where(:recipe_id => recipe.id, :locale => 'de').present? %>
+            <%= link_to t('add_german'), add_german_recipe_path(recipe), :class => 'btn btn-info' %>
+          <%# end %>
+          <%= link_to t('destroy', :default => t("destroy")),
                       recipe_path(recipe),
                       :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_recipe_path,
-            :class => 'btn btn-primary' %>
+                      :data => { :confirm => t('confirm', :default => t("confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-danger' %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

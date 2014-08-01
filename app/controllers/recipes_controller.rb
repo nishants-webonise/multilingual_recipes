@@ -2,7 +2,7 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.json
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.order("id desc");
 
     respond_to do |format|
       format.html # index.html.erb
@@ -78,6 +78,29 @@ class RecipesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to recipes_url }
       format.json { head :no_content }
+    end
+  end
+
+  # GET /recipes/1/add_german
+  def add_german
+    @recipe = Recipe.find(params[:id])
+  end
+
+  # PUT /recipes/1
+  # PUT /recipes/1.json
+  def update_german
+    @recipe = Recipe.find(params[:id])
+
+    I18n.locale = :de
+
+    respond_to do |format|
+      if @recipe.update_attributes(params[:recipe])
+        format.html { redirect_to @recipe, notice: 'Recipe was successfully converted into German.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @recipe.errors, status: :unprocessable_entity }
+      end
     end
   end
 end

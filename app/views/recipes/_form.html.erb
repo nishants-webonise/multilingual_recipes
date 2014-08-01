@@ -1,32 +1,32 @@
 <%= form_for @recipe, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="control-group">
-    <%= f.label :title, :class => 'control-label' %>
+    <%= f.label :title, t('title'), :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :title, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :description, :class => 'control-label' %>
+    <%= f.label :description, t('description'), :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_area :description, :class => 'text_area' %>
+      <%= f.text_area :description, :rows => '6', :class => 'text_area' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :ingredients, :class => 'control-label' %>
+    <%= f.label :ingredients, t('ingredients'), :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_area :ingredients, :class => 'text_area' %>
+      <%= f.text_area :ingredients, :rows => '6', :class => 'text_area' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :preparation_method, :class => 'control-label' %>
+    <%= f.label :preparation_method, t('preparation_method'), :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_area :preparation_method, :class => 'text_area' %>
+      <%= f.text_area :preparation_method, :rows => '6', :class => 'text_area' %>
     </div>
   </div>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+    <%= link_to t('cancel', :default => t("cancel")),
                 recipes_path, :class => 'btn' %>
   </div>
 <% end %>
